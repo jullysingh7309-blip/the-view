@@ -229,7 +229,8 @@ def get_human_names(text):
     return person_list
 
 
-file = json.load(open('contractions.txt', 'r'))
+_dir = os.path.dirname(os.path.abspath(__file__))
+file = json.load(open(os.path.join(_dir, 'contractions.txt'), 'r'))
 contractions = file
 
 
