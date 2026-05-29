@@ -2,14 +2,10 @@ const express = require('express');
 const router = express.Router();
 const fetch = require("node-fetch");
 const request = require("request");
-const { createClient } = require('@supabase/supabase-js');
 
 const API_URL = process.env.API_URL || 'http://localhost:8080';
-
-const supabase = createClient(
-    process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_SERVICE_KEY || ''
-);
+const SUPABASE_URL = process.env.SUPABASE_URL || '';
+const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY || '';
 
 const getData = async url => {
     let json;
@@ -22,13 +18,21 @@ const getData = async url => {
     return json;
 };
 
+// Auth check via direct HTTP (no WebSocket needed)
 async function checkAuth(req, res, next) {
     const sessionCookie = req.cookies.session || "";
-    const { data: { user }, error } = await supabase.auth.getUser(sessionCookie);
-    if (error || !user) {
+    try {
+        const resp = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+            headers: {
+                'Authorization': `Bearer ${sessionCookie}`,
+                'apikey': SUPABASE_SERVICE_KEY
+            }
+        });
+        if (resp.status !== 200) return res.redirect("/login");
+        next();
+    } catch (e) {
         return res.redirect("/login");
     }
-    next();
 }
 
 //////////////////////////////////////////
