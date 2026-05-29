@@ -4,4 +4,4 @@ cmds = [
 ]
 
 [start]
-cmd = "bash start.sh"
+cmd = "python -u src/app.py"
