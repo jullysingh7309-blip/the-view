@@ -1,0 +1,33 @@
+# Secrets
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+.venv/
+*.egg-info/
+
+# Node
+node_modules/
+
+# Firebase / Google credentials (never commit these)
+serviceAccountKey.json
+serviceAccount.json
+*serviceAccount*.json
+*credentials*.json
+
+# Logs
+*.log
+debug.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/

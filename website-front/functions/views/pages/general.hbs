@@ -1,0 +1,127 @@
+
+        <!-- partial -->
+        <div class="content-wrapper">
+          <div class="container">
+            <div class="col-sm-12">
+              <div class="card" data-aos="fade-up">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <h1 class="font-weight-600 mb-4">
+                          {{headLine}}
+                      </h1>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-8">
+                        {{#each data}}
+                            <div class="row">
+                        <div class="col-sm-4 grid-margin">
+                          <div class="rotate-img">
+                            <a href="/description/{{this.desc_line}}/{{this.id}}"><img
+                              src="{{this.urlToImage}}"
+                              alt="banner"
+                              class="img-fluid"
+                            /></a>
+                          </div>
+                        </div>
+                        <div class="col-sm-8 grid-margin">
+                            <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                            <h2 class="font-weight-600 mb-2">
+                              {{this.title}}
+                          </h2>
+                            </a>
+                          <p class="fs-13 text-muted mb-0">
+                            <span class="mr-2">{{this.publisher}} </span>{{this.publishedAt}}
+                          </p>
+                            <p class="fs-15" style=" height: 50px; overflow: hidden;">
+                              {{this.description}}
+                          </p>
+                        </div>
+                      </div>
+                        {{/each}}
+                    </div>
+                    <div class="col-lg-4">
+                      <h2 class="mb-4 text-primary font-weight-600">
+                        Latest news
+                      </h2>
+                        {{#each latest}}
+                            <div class="row">
+                        <div class="col-sm-12">
+                          <div class="border-bottom pb-4 pt-4">
+                            <div class="row">
+                              <div class="col-sm-8">
+                                  <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                                  <h5 class="font-weight-600 mb-1">
+                                    {{this.title}}
+                                </h5>
+                                  </a>
+                                <p class="fs-13 text-muted mb-0">
+                                  <span class="mr-2">{{this.publisher}} </span><br>{{this.publishedAt}}
+                                </p>
+                              </div>
+                              <div class="col-sm-4">
+                                <div class="rotate-img">
+                                    <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                                    <img
+                                    src="{{this.urlToImage}}"
+                                    alt="banner"
+                                    class="img-fluid"
+                                  />
+                                    </a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                        {{/each}}
+
+                      <div class="trending">
+                        <h2 class="mb-4 text-primary font-weight-600">
+                          Trending
+                        </h2>
+                          {{#each suggested}}
+                        <div class="mb-4">
+                          <div class="rotate-img">
+                              <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                              <img
+                              src="{{this.urlToImage}}"
+                              alt="banner"
+                              class="img-fluid"
+                            />
+                              </a>
+                          </div>
+                            <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                            <h3 class="mt-3 font-weight-600">
+                              {{this.title}}
+                          </h3>
+                            </a>
+                          <p class="fs-13 text-muted mb-0">
+                            <span class="mr-2">{{this.publisher}} </span>{{this.publishedAt}}
+                          </p>
+                        </div>
+                          {{/each}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- main-panel ends -->
+        <!-- container-scroller ends -->
+
+        <!-- partial:../partials/_footer.html -->
+    <!-- inject:js -->
+    <script src="/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- plugin js for this page -->
+
+    <script src="/vendors/aos/dist/aos.js/aos.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- Custom js for this page-->
+    <script src="/js/demo.js"></script>
+    <script src="/js/jquery.easeScroll.js"></script>
+    <!-- End custom js for this page-->

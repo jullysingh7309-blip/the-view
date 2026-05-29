@@ -1,0 +1,37 @@
+
+
+<div id="colorlib-main">
+    <div class="colorlib-blog">
+        <div class="container-wrap">
+            <div class="col-md-9">
+                <div class="content-wrap">
+                    <div class="row">
+                        {{#each data}}
+                        <div class="col-md-12">
+                            <div class="blog-entry-style animate-box">
+                                <div class="blog-img">
+                                    <div class="video colorlib-video" style="background-image: url({{this.thumburl}}); height: 600px;">
+                                        <a href="{{this.videourl}}" class="popup-vimeo"><i class="icon-play4"></i></a>
+                                        <div class="overlay"></div>
+                                    </div>
+                                </div>
+                                <div class="desc">
+                                   <!-- <p class="meta">
+                                        <span class="cat"><a href="#">Watch</a></span>
+                                        <span class="date">25 May 2018</span>
+                                        <span class="pos">By <a href="#">Walter</a></span>
+                                    </p>
+                                    <h2><a href="blog.html">Watch Liam Neeson</a></h2>-->
+                                    <p>{{this.location}}</p>
+                                    <p>{{this.tags}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "appAssociation": "AUTO",
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "app",
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=900, s-maxage=1800"
+        }]
+      },
+      {
+        "source": "/**",
+        "dynamicLinks": true
+      }
+    ]
+  }
+}

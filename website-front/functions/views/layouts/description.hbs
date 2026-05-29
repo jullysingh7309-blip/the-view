@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>VIEW</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="http://theview.live/description/{{data.desc_line}}/{{data.id}}" />
+    <meta name="keywords" content="{{data.hashtags}}" />
+    <meta name="author" content="The View" />
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="{{data.title}}"/>
+    <meta property="og:image" content="{{data.urlToImage}}"/>
+    <meta property="og:url" content="http://theview.live/description/{{data.desc_line}}/{{data.id}}"/>
+    <meta property="og:site_name" content="theview.live"/>
+    <meta property="og:description" content="{{data.description}}"/>
+    <meta property="og:type" content="article" />
+    <meta name="twitter:title" content="{{data.title}}" />
+    <meta name="twitter:image" content="{{data.urlToImage}}" />
+    <meta name="twitter:url" content="http://theview.live/description/{{data.desc_line}}/{{data.id}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@theview" />
+
+
+
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="/vendors/mdi/css/materialdesignicons.min.css"/>
+    <link rel="stylesheet" href="/vendors/aos/dist/aos.css/aos.css" />
+
+    <!-- End plugin css for this page -->
+    <link rel="shortcut icon" href="/images/favicon.png" />
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- endinject -->
+</head>
+
+<body>
+
+<div class="container-scroller">
+    <div class="main-panel">
+
+        {{> _navbar}}
+
+        {{{body}}}
+
+        {{> _footer}}
+
+    </div>
+</div>
+
+</body>
+
+</html>
+

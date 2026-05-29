@@ -1,0 +1,119 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+    <div id="colorlib-main">
+        <div class="colorlib-blog">
+            <div class="container-wrap">
+
+                <div class="col-md-9">
+                    <div class="row">
+
+                        {{#each topcards}}
+                            <div class="col-md-3">
+                                <a href="/description/{{this.desc_line}}/{{this.id}}">
+                                    <div class="blog-entry-sports animate-box">
+                                        <p class="tag" style="color:orangered; font-size: small; text-align: center">
+                                <span>
+                                    {{#with this.hashtags}}
+                                        {{#if this.[0]}}
+                                            <a href="/hashtag/{{this.[0]}}" style="color:orangered; font-size: small ">#{{this.[0]}}</a>
+                                        {{/if}}
+                                        {{#if this.[1]}}
+                                            <a href="/hashtag/{{this.[1]}}" style="color:orangered; font-size: small ">#{{this.[1]}}</a>
+                                        {{/if}}
+                                    {{/with}}
+                                </span>
+                                        </p>
+                                        <a href="/description/{{this.desc_line}}/{{this.id}}" class="blog-img" style="background-image: url({{this.urlToImage}}); height: 100px !important;">
+                                        </a>
+                                        <div class="desc">
+
+                                            <p style="text-align: left; font-size: small; height: 80px">{{this.title}}</p>
+
+                                        </div>
+                                        <div>
+                                            <p style="color:orangered; font-size: small ">{{this.publishedAt}}</p>
+
+                                            <p style="background-color: orangered; border: orangered; width: 100%; height: 2px !important;  "></p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        {{/each}}
+
+                        <article class="blog-entry-travel animate-box" style="padding-left: 10px">
+                            <div class="blog-img" style="background-image: url({{data.urlToImage}});"></div>
+                            <div class="desc">
+                                <h2>{{data.title}}</h2>
+                                <p style="font-size: small">{{data.publishedAt}}</p>
+                                <p style="font-size: initial">{{data.description}}</p>
+                                <p><a href="{{data.url}}" class="btn btn-primary with-arrow" target="_blank">Read More <i class="icon-arrow-right"></i></a>
+                                    </p>
+                                <p>
+
+                                    <a href="whatsapp://send?text=https://theview.live/description/{{data.desc_line}}/{{data.id}}" target="_blank" ><i class="icon-whatsapp " style="color: #25D366; padding: 5px"></i></a>
+                                    <a href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Ftheview.live%2Fdescription%2F{{data.desc_line}}%2F{{data.id}}" target="_blank" rel="noopener" class="icon-facebook2" style="padding: 5px; color: #3b5998">
+                                    </a>
+                                    <a  class="icon-linkedin2" style="padding: 5px; color: #0e76a8" href="https://www.linkedin.com/shareArticle?mini=true&url=http://theview.live/description/{{data.desc_line}}/{{data.id}}&title={{data.title}}&summary={{data.description}}&source=View" onclick="window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;">
+                                    </a>
+                                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false" target="_blank" style="padding: 5px; color: #00acee"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+                                </p>
+
+                            </div>
+                        </article>
+
+                        {{#each cards}}
+                        <div class="col-md-3">
+                            <a href="/description/{{this.desc_line}}/{{this.id}}">
+                                <div class="blog-entry-sports animate-box">
+                                    <p class="tag" style="color:orangered; font-size: small; text-align: center">
+                                <span>
+                                    {{#with this.hashtags}}
+                                        {{#if this.[0]}}
+                                            <a href="/hashtag/{{this.[0]}}" style="color:orangered; font-size: small ">#{{this.[0]}}</a>
+                                        {{/if}}
+                                        {{#if this.[1]}}
+                                            <a href="/hashtag/{{this.[1]}}" style="color:orangered; font-size: small ">#{{this.[1]}}</a>
+                                        {{/if}}
+                                    {{/with}}
+                                </span>
+                                    </p>
+                                <a href="/description/{{this.desc_line}}/{{this.id}}" class="blog-img" style="background-image: url({{this.urlToImage}}); height: 100px !important;">
+                                </a>
+                                <div class="desc">
+
+                                    <p style="text-align: left; font-size: small; height: 80px">{{this.title}}</p>
+
+                                </div>
+                                    <div>
+                                        <p style="color:orangered; font-size: small ">{{this.publishedAt}}</p>
+
+                                        <p style="background-color: orangered; border: orangered; width: 100%; height: 2px !important;  "></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        {{/each}}
+
+
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+

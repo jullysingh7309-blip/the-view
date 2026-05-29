@@ -1,0 +1,370 @@
+<style>
+    h5, .h5{
+        font-size: 15px;
+    }
+</style>
+        <!-- partial -->
+        <div class="content-wrapper">
+          <div class="container">
+            <div class="row" data-aos="fade-up">
+              <div class="col-xl-8 stretch-card grid-margin">
+                <div class="position-relative">
+                  <img src="{{toptrending.urlToImage}}" alt="banner" class="img-fluid" style="width: 800px"/>
+                  <div class="banner-content">
+
+                    <h1 class="mb-0"></h1>
+                      <div class="badge badge-danger fs-12 font-weight-bold mb-3">
+                          {{toptrending.publisher}}
+                      </div>
+                      <a href="/description/{{toptrending.desc_line}}/{{toptrending.id}}" style="color: white">
+                      <h1 class="mb-2">
+                        {{toptrending.title}}
+                    </h1>
+                      </a>
+                    <div class="fs-12">
+                      <span class="mr-2">Trending </span>{{toptrending.publishedAt}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-4 stretch-card grid-margin">
+                <div class="card bg-dark text-white">
+                  <div class="card-body">
+                    <h2>Latest news</h2>
+
+                      {{#each latestcards}}
+
+                          <div
+                      class="d-flex border-bottom-blue pt-3 pb-4 align-items-center justify-content-between"
+                    >
+                      <div class="pr-3">
+                          <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16" style="color: white">
+                          <h5>{{this.title}}</h5>
+                          </a>
+                        <div class="fs-12">
+                          <span class="mr-2">{{this.publisher}} </span>{{this.publishedAt}}
+                        </div>
+                      </div>
+                      <div class="rotate-img">
+                          <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16">
+                          <img
+                          src="{{this.urlToImage}}"
+                          alt="thumb"
+                          class="img-fluid img-lg"
+                        />
+                          </a>
+                      </div>
+                    </div>
+
+                      {{/each}}
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up">
+              <div class="col-lg-3 stretch-card grid-margin">
+                <div class="card">
+                    <div class="col-sm-12">
+                        <div class="card-title" style="padding-left: 50px; padding-top: 10px">
+                            Key Players
+                        </div>
+                        {{#each hash_list}}
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="border-bottom pb-3">
+                                        <div class="row">
+                                            <div class="col-sm-5 pr-2">
+                                                <div class="rotate-img">
+                                                    <img
+                                                            src="{{this.img}}"
+                                                            alt="thumb"
+                                                            class="img-fluid" style="height: 60px; width:60px; border-radius: 50%"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-7 pl-2" style="top: 20px; left: -10px">
+                                                <p class="fs-16 font-weight-600 mb-0">
+                                                    {{this.keyplayer}}
+                                                </p>
+                                                <!--<p class="mb-0 fs-13">
+                                                  Lorem Ipsum has been
+                                                </p>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+              </div>
+              <div class="col-lg-9 stretch-card grid-margin">
+                <div class="card">
+                  <div class="card-body">
+
+                      {{#each trending_news_list}}
+
+                          <div class="row">
+                      <div class="col-sm-4 grid-margin">
+                        <div class="position-relative">
+                            <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                            <div class="rotate-img">
+                            <img
+                              src="{{this.urlToImage}}"
+                              alt="thumb"
+                              class="img-fluid"
+                            />
+                          </div>
+                            </a>
+                          <div class="badge-positioned">
+                            <span class="badge badge-danger font-weight-bold"
+                              >TRENDING</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-8  grid-margin">
+                          <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                          <h2 class="mb-2 font-weight-600">
+                            {{this.title}}
+                        </h2>
+                          </a>
+                        <div class="fs-13 mb-2">
+                          <span class="mr-2">{{this.publisher}} </span>{{this.publishedAt}}
+                        </div>
+                        <p class="mb-0" style=" height: 60px;">
+                            {{this.description}}
+                        </p>
+                      </div>
+                    </div>
+
+                      {{/each}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up">
+              <div class="col-sm-12 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-lg-8">
+                        <div class="card-title">
+                          Video
+                        </div>
+                        <div class="row">
+                            {{#each row1_video}}
+                          <div class="col-sm-6 grid-margin">
+                            <div class="position-relative">
+
+                                  <iframe width="420" height="315"
+                                          src="{{this.contentUrl}}"
+                                          class="img-fluid"
+                                  >
+                                  </iframe>
+
+                                <div class="badge-positioned w-90">
+                                <div
+                                  class="d-flex justify-content-between align-items-center"
+                                >
+                                  <span
+                                    class="badge badge-danger font-weight-bold"
+                                    >{{this.publisher}}</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+{{/each}}
+
+
+                        </div>
+                        <div class="row">
+                            {{#each row2_video}}
+                          <div class="col-sm-6 grid-margin">
+                            <div class="position-relative">
+                                <iframe width="420" height="315"
+                                        src="{{this.contentUrl}}"
+                                        class="img-fluid"
+                                >
+                                </iframe>
+                              <div class="badge-positioned w-90">
+                                <div
+                                  class="d-flex justify-content-between align-items-center"
+                                >
+                                  <span
+                                    class="badge badge-danger font-weight-bold"
+                                    >{{this.publisher}}</span
+                                  >
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                            {{/each}}
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div
+                          class="d-flex justify-content-between align-items-center"
+                        >
+                          <div class="card-title">
+                            Latest Video
+                          </div>
+                          <p class="mb-3">See all</p>
+                        </div>
+                          {{#each latestvideo}}
+                        <div
+                          class="d-flex align-items-center border-bottom pb-2"
+                        >
+                          <div class="div-w-80 mr-3">
+                            <div class="rotate-img">
+                              <img
+                                src="{{this.thumbnailUrl}}"
+                                alt="thumb"
+                                class="img-fluid"
+                              />
+                            </div>
+                          </div>
+                          <h3 class="mb-0" style="font-size: 15px">
+                              {{this.title}}
+                          </h3>
+                        </div>
+{{/each}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" data-aos="fade-up">
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-xl-6">
+                        <div class="card-title">
+                          Entertainment
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-8 col-sm-6">
+                            <div class="rotate-img">
+                              <img
+                                src="{{topentertainment.urlToImage}}"
+                                alt="thumb"
+                                class="img-fluid"
+                              />
+                            </div>
+                            <h2 class="mt-3 text-primary mb-2">
+                                {{topentertainment.title}}
+                            </h2>
+                            <p class="fs-13 mb-1 text-muted">
+                              <span class="mr-2">{{topentertainment.publisher}} </span>{{topentertainment.publishedAt}}
+                            </p>
+                            <!--<p class="my-3 fs-15">
+
+                            </p>-->
+                            <a href="/description/{{topentertainment.desc_line}}/{{topentertainment.id}}" class="font-weight-600 fs-16 text-dark">
+                                Read more
+                            </a>
+
+                          </div>
+                          <div class="col-xl-6 col-lg-4 col-sm-6">
+                              {{#each latestEcards}}
+                                  <div class="border-bottom pb-3 mb-3">
+                              <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                                  <h3 class="font-weight-600 mb-0" style="font-size: 15px">
+                                  {{this.title}}
+                              </h3>
+                              </a>
+                              <p class="fs-13 text-muted mb-0">
+                                <span class="mr-2">{{this.publisher}} </span>{{this.publishedAt}}
+                              </p>
+                            </div>
+                              {{/each}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-6">
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <div class="card-title">
+                              Spot light
+                            </div>
+                              {{#each entertainment_news_list}}
+                            <div class="border-bottom pb-3">
+                              <div class="rotate-img">
+                                <img
+                                  src="{{this.urlToImage}}"
+                                  alt="thumb"
+                                  class="img-fluid"
+                                />
+                              </div>
+                                <a href="/description/{{this.desc_line}}/{{this.id}}" class="font-weight-600 fs-16 text-dark">
+                                    <p class="fs-16 font-weight-600 mb-0 mt-3" style="height: 28px">
+                                  {{this.title}}
+                              </p></a>
+                            </div>
+                              {{/each}}
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="card-title">
+                              Key Players
+                            </div>
+                              {{#each hash_list}}
+
+                            <div class="row">
+                              <div class="col-sm-12">
+                                <div class="border-bottom pb-3">
+                                  <div class="row">
+                                    <div class="col-sm-5 pr-2">
+                                      <div class="rotate-img">
+                                        <img
+                                          src="{{this.img}}"
+                                          alt="thumb"
+                                          class="img-fluid w-100"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-7 pl-2">
+                                      <p class="fs-16 font-weight-600 mb-0">
+                                          {{this.keyplayer}}
+                                      </p>
+                                      <!--<p class="mb-0 fs-13">
+                                        Lorem Ipsum has been
+                                      </p>-->
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                              {{/each}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- main-panel ends -->
+        <!-- container-scroller ends -->
+
+        <!-- partial -->
+
+
+  <!-- inject:js -->
+  <script src="/vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <script src="/vendors/aos/dist/aos.js/aos.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="/js/demo.js"></script>
+  <script src="/js/jquery.easeScroll.js"></script>
+  <!-- End custom js for this page-->
+

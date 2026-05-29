@@ -1,0 +1,13 @@
+Flask
+flask-cors
+Werkzeug
+gunicorn
+requests
+nltk
+numpy
+supabase
+python-dotenv
+feedparser
+awesome-slugify
+newspaper3k
+lxml[html_clean]

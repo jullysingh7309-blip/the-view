@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{title_head}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="http://theview.live/description/{{data.desc_line}}/{{data.id}}" />
+    <meta name="keywords" content="{{data.hashtags}}" />
+    <meta name="author" content="" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-172031285-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-172031285-1');
+    </script>
+
+    <!-- Facebook and Twitter integration -->
+    <meta property="og:title" content="{{data.title}}"/>
+    <meta property="og:image" content="{{data.urlToImage}}"/>
+    <meta property="og:url" content="http://theview.live/description/{{data.desc_line}}/{{data.id}}"/>
+    <meta property="og:site_name" content="theview.live"/>
+    <meta property="og:description" content="{{data.description}}"/>
+    <meta property="og:type" content="article" />
+    <meta name="twitter:title" content="{{data.title}}" />
+    <meta name="twitter:image" content="{{data.urlToImage}}" />
+    <meta name="twitter:url" content="http://theview.live/description/{{data.desc_line}}/{{data.id}}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@theview" />
+    <link rel="shortcut icon" href="/front-panel/images/logo-view.png" type="image/x-icon">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/front-panel/css/animate.min.css">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="/front-panel/css/icomoon.css">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="/front-panel/css/bootstrap.css">
+    <!-- Flexslider  -->
+    <link rel="stylesheet" href="/front-panel/css/flexslider.css">
+    <!-- Magnific Popup -->
+    <link rel="stylesheet" href="/front-panel/css/magnific-popup.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="/front-panel/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/front-panel/css/owl.theme.default.min.css">
+    <!-- Theme style  -->
+    <link rel="stylesheet" href="/front-panel/css/style.css">
+
+
+
+</head>
+
+<body>
+<div id="colorlib-page">
+
+{{> _header}}
+
+{{{body}}}
+</div>
+<!-- Modernizr JS -->
+<script src="/front-panel/js/modernizr-2.6.2.min.js"></script>
+<!-- FOR IE9 below -->
+<!--[if lt IE 9]>
+<script src="/front-panel/js/respond.min.js"></script>
+<![endif]-->
+<!-- jQuery -->
+<script src="/front-panel/js/jquery.min.js"></script>
+<!-- jQuery Easing -->
+<script src="/front-panel/js/jquery.easing.1.3.js"></script>
+<!-- Bootstrap -->
+<script src="/front-panel/js/bootstrap.min.js"></script>
+<!-- Waypoints -->
+<script src="/front-panel/js/jquery.waypoints.min.js"></script>
+<!-- Flexslider -->
+<script src="/front-panel/js/jquery.flexslider-min.js"></script>
+<!-- Magnific Popup -->
+<script src="/front-panel/js/jquery.magnific-popup.min.js"></script>
+<script src="/front-panel/js/magnific-popup-options.js"></script>
+<!-- Owl Carousel -->
+<script src="/front-panel/js/owl.carousel.min.js"></script>
+<!-- Sticky Kit -->
+<script src="/front-panel/js/sticky-kit.min.js"></script>
+
+
+<!-- MAIN JS -->
+<script src="/front-panel/js/main.js"></script>
+
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,123 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+        <div class="content-header row">
+            <div class="content-header-left col-md-4 col-12 mb-2">
+                <h3 class="content-header-title">Unpublished News</h3>
+            </div>
+        </div>
+        <div class="content-body">
+            {{#each data}}
+                <section class="textarea-select">
+                    <form id="EditForm-{{this.id}}" action="/update-entry" method="post"></form>
+                    <form id="DeleteForm-{{this.id}}" action="/delete-news-entry" onsubmit="return checkFunction()" method="post"></form>
+                    <!-- Textarea start -->
+                    <div class="row match-height">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">News Article # <b><u>{{this.category}}</u></b>
+                                        <input name="idToDel" value="{{this.id}}" style="display: none"
+                                               form="DeleteForm-{{this.id}}">
+                                        <input name="routeToRender" value="{{../route}}" style="display: none; "
+                                               form="DeleteForm-{{this.id}}">
+                                    </h4>
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="card-body">
+                                        <h5 class="abc-05" style="margin-top: 0.5rem !important;">
+                                            <button type="button"
+                                                    class="btn btn-light btn-min-width mr-1 mb-1">{{this.publisher}}</button>
+                                            <button type="button"
+                                                    class="btn btn-light btn-min-width mr-1 mb-1">{{this.publishedAt}}</button>
+                                            <button type="button"
+                                                    class="btn btn-light btn-min-width mr-1 mb-1">{{this.sentiment}}</button>
+                                            <a href="{{this.urlToImage}}" target="_blank">
+                                                <button type="button" class="btn btn-light btn-min-width mr-1 mb-1">Go
+                                                    To Image
+                                                </button>
+                                            </a>
+                                            <a href="{{this.url}}" target="_blank">
+                                                <button type="button" class="btn btn-light btn-min-width mr-1 mb-1">Go
+                                                    To Article
+                                                </button>
+                                            </a>
+                                        </h5>
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="publisher" value="{{this.publisher}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="routeToRender" value="{{../route}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="idToEdit" value="{{this.id}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="publishedAt" value="{{this.publishedAt}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="sentiment" value="{{this.sentiment}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="category" value="{{this.category}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="urlToImage" value="{{this.urlToImage}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="url" value="{{this.url}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="desc_line" value="{{this.desc_line}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                            <input class="form-control" name="createdAt" value="{{this.createdAt}}"
+                                                   style="display: none" form="EditForm-{{this.id}}">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Title</h5>
+                                        <fieldset class="form-group">
+                                            <textarea class="form-control" name="title" oninput="auto_height(this)"
+                                                      form="EditForm-{{this.id}}">{{this.title}}</textarea>
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Description</h5>
+                                        <fieldset class="form-group">
+                                            <textarea class="form-control" name="description"
+                                                      oninput="auto_height(this)"
+                                                      form="EditForm-{{this.id}}">{{this.description}}</textarea>
+
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Hashtags</h5>
+                                        <fieldset class="form-group">
+                                            <textarea class="form-control" name="hashtags" oninput="auto_height(this)"
+                                                      form="EditForm-{{this.id}}" style="font-size: 1.2rem !important;">{{this.hashtags}}</textarea>
+                                        </fieldset>
+                                    </div>
+                                    <button type="submit" class="btn btn-danger btn-min-width mr-1 mb-1"
+                                            style="float: right" form="DeleteForm-{{this.id}}">Delete
+                                    </button>
+                                    <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1"
+                                            style="float: right" form="EditForm-{{this.id}}">Publish
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+            {{/each}}
+        </div>
+    </div>
+</div>
+<!-- ////////////////////////////////////////////////////////////////////////////-->
+
+<script>
+    function auto_height(elem) {  /* javascript */
+        elem.style.height = "1px";
+        elem.style.height = (elem.scrollHeight) + "px";
+    }
+</script>
+<script>
+    function checkFunction() {
+        let con = confirm("Are you sure you want to delete!");
+        if(con != true){
+            return false;
+        }
+
+    }
+</script>

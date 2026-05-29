@@ -1,0 +1,104 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+        <div class="content-header row">
+            <div class="content-header-left col-md-4 col-12 mb-2">
+                <h3 class="content-header-title">Add News</h3>
+            </div>
+        </div>
+        <div class="content-body">
+
+                <section class="textarea-select">
+                    <form id="AddForm" action="/add-entry" method="post"></form>
+                    <!-- Textarea start -->
+                    <div class="row match-height">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">News Article</h4>
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="card-body">
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="routeToRender" value="{{route}}"
+                                                   style="display: none" form="AddForm">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Publisher</h5>
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="publisher" oninput="auto_height(this)"
+                                                      form="AddForm" />
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Image Url</h5>
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="urlToImage" oninput="auto_height(this)"
+                                                      form="AddForm" />
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Article link</h5>
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="url" oninput="auto_height(this)"
+                                                      form="AddForm">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Title</h5>
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="title" oninput="auto_height(this)"
+                                                      form="AddForm" />
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Description</h5>
+                                        <fieldset class="form-group">
+                                            <textarea class="form-control" name="description" rows="10"
+                                                      form="AddForm"></textarea>
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Hashtags</h5>
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="hashtags" oninput="auto_height(this)"
+                                                      form="AddForm" style="font-size: 1.2rem !important;" />
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Category</h5>
+                                        <select name="category" form="AddForm">
+                                            <option value="trending">Trending</option>
+                                            <option value="technology">Technology</option>
+                                            <option value="sports">Sports</option>
+                                            <option value="business">Business</option>
+                                            <option value="health">Health</option>
+                                            <option value="world">World</option>
+                                            <option value="sponsored">Sponsored</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1"
+                                            style="float: right" form="AddForm">Publish
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+        </div>
+    </div>
+</div>
+<!-- ////////////////////////////////////////////////////////////////////////////-->
+
+<script>
+    function auto_height(elem) {  /* javascript */
+        elem.style.height = "1px";
+        elem.style.height = (elem.scrollHeight) + "px";
+    }
+</script>
+<script>
+    function checkFunction() {
+        let con = confirm("Are you sure you want to delete!");
+        if(con != true){
+            return false;
+        }
+
+    }
+</script>

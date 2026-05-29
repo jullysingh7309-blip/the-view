@@ -1,0 +1,64 @@
+<div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+        <div class="content-header row">
+            <div class="content-header-left col-md-4 col-12 mb-2">
+                <h3 class="content-header-title">Add News with Url</h3>
+            </div>
+        </div>
+        <div class="content-body">
+
+                <section class="textarea-select">
+                    <form id="AddForm" action="/get-link-data" method="post"></form>
+                    <!-- Textarea start -->
+                    <div class="row match-height">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">News Article</h4>
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="card-body">
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="routeToRender" value="{{route}}"
+                                                   style="display: none" form="AddForm">
+                                        </fieldset>
+
+                                        <h5 class="mt-2">Article link</h5>
+                                        <fieldset class="form-group">
+                                            <input class="form-control" name="url" oninput="auto_height(this)"
+                                                      form="AddForm">
+                                        </fieldset>
+
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1"
+                                            style="float: right" form="AddForm">Next
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+        </div>
+    </div>
+</div>
+<!-- ////////////////////////////////////////////////////////////////////////////-->
+
+<script>
+    function auto_height(elem) {  /* javascript */
+        elem.style.height = "1px";
+        elem.style.height = (elem.scrollHeight) + "px";
+    }
+</script>
+<script>
+    function checkFunction() {
+        let con = confirm("Are you sure you want to delete!");
+        if(con != true){
+            return false;
+        }
+
+    }
+</script>

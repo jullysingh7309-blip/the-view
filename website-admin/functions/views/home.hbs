@@ -1,0 +1,85 @@
+<div id="colorlib-main">
+    <div class="colorlib-blog">
+        <div class="container-wrap">
+            <div class="row row-pb-lg">
+                <div class="col-md-12 blog-slider">
+                    <div class="owl-carousel1">
+
+                        {{#each data}}
+
+                            <div class="item">
+                                <a href="/description/{{this.desc_line}}/{{this.id}}">
+                                    <div class="blog-entry">
+                                        <div class="blog-img darken-pseudo"
+                                             style="background-image: url({{this.urlToImage}})">
+                                            <div class="desc desc2 text-center">
+                                                <p class="tag"><span>
+                                                    {{#with this.hashtags}}
+                                                        {{#if this.[0]}}
+                                                            <b>{{this.[0]}}</b>
+                                                        {{/if}}
+                                                    {{/with}}
+                                                </span></p>
+                                                <div class="desc-bottom">
+                                                    <p class="head-article story-view">{{this.title}}</p>
+                                                    <p class="story-description">{{this.description}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        {{/each}}
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" style="padding: 20px">
+
+                {{#each data}}
+
+                    <div class="col-md-4 text-center" style="height: 500px">
+                        <div class="blog-entry-sports animate-box">
+                            <a href="/description/{{this.desc_line}}/{{this.id}}" class="blog-img"
+                               style="background-image: url({{this.urlToImage}}); height: 200px">
+                            </a>
+                            <div class="desc">
+                                <p class="tag">
+                                <span>
+                                    {{#with this.hashtags}}
+                                        {{#if this.[0]}}
+                                            <a href="/hashtag/{{this.[0]}}"
+                                               style="color:orangered; font-size: small ;font-weight: bolder">#{{this.[0]}}</a>
+                                        {{/if}}
+                                        {{#if this.[1]}}
+                                            <a href="/hashtag/{{this.[1]}}"
+                                               style="color:orangered; font-size: small; font-weight: bolder ">#{{this.[1]}}</a>
+                                        {{/if}}
+                                        {{#if this.[2]}}
+                                            <a href="/hashtag/{{this.[2]}}"
+                                               style="color:orangered; font-size: small; font-weight: bolder ">#{{this.[2]}}</a>
+                                        {{/if}}
+                                    {{/with}}
+                                </span>
+                                </p>
+                                <p style="text-align: left"><b>{{this.title}}</b></p>
+                                <p style="text-align: left"><span style="font-size: x-small">{{this.publishedAt}}</span>
+                                    <br>{{this.description}}
+                                    <a href="/description/{{this.desc_line}}/{{this.id}}"
+                                       style="font-size: x-small;color: orangered">Read more.. </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                {{/each}}
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

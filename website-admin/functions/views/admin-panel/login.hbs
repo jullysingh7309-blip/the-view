@@ -1,0 +1,84 @@
+<div class="app-content content" style="margin-left: 0 !important;">
+    <div class="content-wrapper">
+        <div class="content-wrapper-before"></div>
+        <div class="content-body">
+            <form class="basic-inputs" id="login">
+                <div class="row match-height h-100">
+                    <div class="col-xl-4 col-lg-6 col-md-12 mx-auto my-auto align-middle">
+                        <div class="card" style="margin-top: 150px">
+                            <div class="card-header">
+                                <h4 class="card-title" style="text-align: center">Admin Login</h4>
+                            </div>
+                            <div class="card-block">
+                                <div class="card-body">
+                                    Email
+                                    <fieldset class="form-group">
+                                        <input type="email" class="form-control" id="emailField" placeholder="admin@theview.com">
+                                    </fieldset>
+                                    Password
+                                    <fieldset class="form-group">
+                                        <input type="password" class="form-control" id="passwordField">
+                                    </fieldset>
+                                    <p id="errorMsg" style="color:red; display:none; text-align:center;"></p>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-min-width mr-1 mb-1 mx-auto">Login</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SUPABASE_URL = '{{SUPABASE_URL}}';
+    const SUPABASE_ANON_KEY = '{{SUPABASE_ANON_KEY}}';
+
+    document.getElementById('login').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email    = document.getElementById('emailField').value.trim();
+        const password = document.getElementById('passwordField').value;
+        const errorMsg = document.getElementById('errorMsg');
+        errorMsg.style.display = 'none';
+
+        let res, data;
+        try {
+            res = await fetch(SUPABASE_URL + '/auth/v1/token?grant_type=password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_ANON_KEY
+                },
+                body: JSON.stringify({ email, password })
+            });
+            data = await res.json();
+        } catch (err) {
+            errorMsg.textContent = 'Network error. Is the server running?';
+            errorMsg.style.display = 'block';
+            return;
+        }
+
+        if (!res.ok || !data.access_token) {
+            errorMsg.textContent = data.error_description || data.msg || 'Login failed. Check your credentials.';
+            errorMsg.style.display = 'block';
+            return;
+        }
+
+        const idToken = data.access_token;
+
+        const sessionRes = await fetch('/sessionLogin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idToken })
+        });
+
+        if (sessionRes.ok) {
+            window.location.assign('/pdRnZRfiUaSx2cAcLdK5/add-news');
+        } else {
+            errorMsg.textContent = 'Server session error. Please try again.';
+            errorMsg.style.display = 'block';
+        }
+    });
+</script>

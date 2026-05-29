@@ -1,0 +1,16 @@
+Flask
+flask-cors
+Werkzeug
+gunicorn
+requests
+pytz
+nltk
+numpy
+supabase
+python-dotenv
+nameparser
+flasgger
+requests_oauthlib
+awesome-slugify
+newspaper3k
+lxml[html_clean]

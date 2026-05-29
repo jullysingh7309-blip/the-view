@@ -1,0 +1,78 @@
+<style>
+    ::placeholder {
+        color: red;
+        opacity: 1; /* Firefox */
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: red;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: red;
+    }
+</style>
+<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
+    <h1 id="colorlib-logo"><a href="/"><img src="/front-panel/images/logo-view.png" style="width: auto; height: 50px">
+         VIEW</a></h1>
+    <nav id="colorlib-main-menu" role="navigation">
+        <ul>
+            <!--<li class="colorlib-active"><a href="/">Trending</a></li>-->
+            <li><a href="/" style="color: black">Trending</a></li>
+            <li><a href="/business" style="color: black">Business</a></li>
+            <li><a href="/technology" style="color: black">Technology</a></li>
+            <li><a href="/health" style="color: black">Health</a></li>
+            <li><a href="/entertainment" style="color: black">Entertainment</a></li>
+            <li><a href="/sports" style="color: black">Sports</a></li>
+        </ul>
+    </nav>
+    <br>
+    <br>
+    <div class="side animate-box fadeInUp animated" style="margin-bottom: 0 !important;">
+    <div class="form-group">
+        <input class="form-control" id="search" placeholder="Search">
+        <ul class="list-group" id="result"></ul>
+    </div>
+    </div>
+
+    {{#each tags}}
+        <a href="/hashtag/{{this.tagName}}" style="color:orangered; font-size: small; font-weight: bolder ">#{{this.tagName}}</a>
+    {{/each}}
+
+    <div class="colorlib-footer">
+        <p style="color: black"><small>Copyright &copy;<script>document.write(new Date().getFullYear());</script></small></p>
+
+        <ul>
+            <li><a href="https://www.facebook.com/TheViewGlobal" target="_blank"><i class="icon-facebook2"></i></a></li>
+            <li><a href="https://twitter.com/theViewapp" target="_blank"><i class="icon-twitter2"></i></a></li>
+            <li><a href="https://www.linkedin.com/company/theviewapp" target="_blank"><i class="icon-linkedin2"></i></a></li>
+        </ul>
+    </div>
+
+</aside>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.0.min.js"></script>
+<script>
+        $(document).ready(function () {
+            $.ajaxSetup({ cache: false });
+            $('#search').keyup(function(){
+                $('#result').html('');
+                var searchField = $('#search').val();
+                var expression = new RegExp(searchField, "i");
+                    $.ajax({
+                        url: "/search_hashtag",
+                        dataType: "jsonp",
+                        type: "GET",
+                        data: searchField,  // request is the value of search input
+                        success: function (data) {
+                            $.each(data, function(key, value){
+                                if (value.tagName.search(expression) != -1)
+                                {
+                                    $('#result').append('<li class="list-group-item link-class"><a href="/hashtag/'+value.tagName+'"> '+value.tagName+'</li>');
+                                }
+                            });
+                        }
+                    });
+            })
+        });
+</script>

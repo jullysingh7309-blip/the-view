@@ -1,0 +1,28 @@
+ <div id="colorlib-main">
+        <div class="colorlib-blog">
+            <div class="container-wrap">
+
+                <div class="col-md-9">
+                    <div class="row">
+
+                        {{#each data}}
+                            <div class="col-md-3">
+                                <a href="/description/{{this.desc_line}}/{{this.id}}">
+                            <div class="blog-entry animate-box">
+                                <div class="blog-img blog-img2 darken-pseudo" style="background-image: url({{this.urlToImage}});">
+                                    <div class="desc text-center " style="font-size: small; padding: 10px !important;">
+                                        <p>{{this.title}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                                </a>
+                            </div>
+                        {{/each}}
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+ </div>
