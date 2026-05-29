@@ -1,2 +1,7 @@
+[phases.build]
+cmds = [
+  "python -m nltk.downloader averaged_perceptron_tagger punkt stopwords wordnet vader_lexicon -d /usr/local/nltk_data"
+]
+
 [start]
-cmd = "cd src && python app.py"
+cmd = "bash start.sh"
