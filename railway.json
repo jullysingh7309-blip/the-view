@@ -5,5 +5,19 @@
   "deploy": {
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 3
+  },
+  "services": {
+    "main-api": {
+      "rootDirectory": "server"
+    },
+    "cron-server": {
+      "rootDirectory": "server-cron"
+    },
+    "admin-panel": {
+      "rootDirectory": "website-admin/functions"
+    },
+    "the-view": {
+      "rootDirectory": "website-front/functions"
+    }
   }
 }
