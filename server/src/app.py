@@ -1,4 +1,5 @@
 import os
+# Force rebuild - May 30, 2026
 try:
     from dotenv import load_dotenv
     load_dotenv(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '.env'))
