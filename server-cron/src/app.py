@@ -645,5 +645,26 @@ def getnotificationupdate():
     return jsonify(notificationPost())
 
 
+@app.route('/health', methods=['GET'])
+def health():
+    return 'OK'
+
+
+# ── Auto-scheduler: fetch news every 6 hours ─────────────────────────────────
+from apscheduler.schedulers.background import BackgroundScheduler
+
+def scheduled_fetch():
+    print("[Scheduler] Running scheduled news fetch...")
+    try:
+        result = ndtvnewsUpdate()
+        print(f"[Scheduler] Done: {result}")
+    except Exception as e:
+        print(f"[Scheduler] Error: {e}")
+
+scheduler = BackgroundScheduler()
+scheduler.add_job(scheduled_fetch, 'interval', hours=6, id='fetch_news')
+scheduler.start()
+print("[Scheduler] Auto-fetch every 6 hours started.")
+
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5050)))
+    app.run(debug=False, use_reloader=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5050)))
