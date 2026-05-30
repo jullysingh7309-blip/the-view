@@ -601,4 +601,4 @@ def getnotificationupdate():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, use_reloader=False, host='localhost', port=int(os.environ.get('PORT', 5050)))
+    app.run(debug=True, use_reloader=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5050)))

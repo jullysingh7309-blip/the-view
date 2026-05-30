@@ -1,7 +1,2 @@
-[phases.build]
-cmds = [
-  "python -m nltk.downloader averaged_perceptron_tagger punkt stopwords wordnet vader_lexicon -d /usr/local/nltk_data"
-]
-
 [start]
-cmd = "bash start.sh"
+cmd = "gunicorn --chdir src app:app --bind 0.0.0.0:$PORT"
