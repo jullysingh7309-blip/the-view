@@ -276,37 +276,55 @@ def sentiment_analyse(sentiment_text):
 def addHashtags(newTag, story_id):
     story_id = [story_id]
     newCount = 1
-    response = db.table('hashtags').select('*').eq('tag_name', newTag).execute()
-    if response.data:
-        hash_val = response.data[0]
-        story_id.extend(hash_val['ids'])
-        newCount = newCount + hash_val['count']
-        db.table('hashtags').update({'count': newCount, 'ids': story_id}).eq('tag_name', newTag).execute()
-    else:
-        db.table('hashtags').insert({'tag_name': newTag, 'count': newCount, 'ids': story_id}).execute()
+    try:
+        response = db.table('hashtags').select('*').eq('tag_name', newTag).execute()
+        if response.data:
+            hash_val = response.data[0]
+            story_id.extend(hash_val['ids'])
+            newCount = newCount + hash_val['count']
+            db.table('hashtags').update({'count': newCount, 'ids': story_id}).eq('tag_name', newTag).execute()
+        else:
+            try:
+                db.table('hashtags').insert({'tag_name': newTag, 'count': newCount, 'ids': story_id}).execute()
+            except Exception:
+                # Race condition: already inserted, update instead
+                db.table('hashtags').update({'count': newCount, 'ids': story_id}).eq('tag_name', newTag).execute()
+    except Exception as e:
+        print(f"addHashtags error for {newTag}: {e}")
 
 
 def addKeyPlayers(keyPlayer, story_id, photo):
     story_id = [story_id]
     newCount = 1
     imageUrl = photo
-    response = db.table('keyplayer').select('*').eq('name', keyPlayer).execute()
-    if response.data:
-        hash_val = response.data[0]
-        story_id.extend(hash_val['ids'])
-        newCount = newCount + hash_val['count']
-        db.table('keyplayer').update({
-            'count': newCount,
-            'ids': story_id,
-            'urlToImage': imageUrl
-        }).eq('name', keyPlayer).execute()
-    else:
-        db.table('keyplayer').insert({
-            'name': keyPlayer,
-            'count': newCount,
-            'ids': story_id,
-            'urlToImage': imageUrl
-        }).execute()
+    try:
+        response = db.table('keyplayer').select('*').eq('name', keyPlayer).execute()
+        if response.data:
+            hash_val = response.data[0]
+            story_id.extend(hash_val['ids'])
+            newCount = newCount + hash_val['count']
+            db.table('keyplayer').update({
+                'count': newCount,
+                'ids': story_id,
+                'urlToImage': imageUrl
+            }).eq('name', keyPlayer).execute()
+        else:
+            try:
+                db.table('keyplayer').insert({
+                    'name': keyPlayer,
+                    'count': newCount,
+                    'ids': story_id,
+                    'urlToImage': imageUrl
+                }).execute()
+            except Exception:
+                # Race condition: already inserted, update instead
+                db.table('keyplayer').update({
+                    'count': newCount,
+                    'ids': story_id,
+                    'urlToImage': imageUrl
+                }).eq('name', keyPlayer).execute()
+    except Exception as e:
+        print(f"addKeyPlayers error for {keyPlayer}: {e}")
 
 
 ################## NDTV NEWS START  ##################################################
