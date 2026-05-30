@@ -1,2 +1,8 @@
+[phases.install]
+cmds = [
+  "pip install -r requirements.txt",
+  "python -m nltk.downloader punkt punkt_tab averaged_perceptron_tagger averaged_perceptron_tagger_eng stopwords wordnet vader_lexicon -d /usr/local/nltk_data"
+]
+
 [start]
 cmd = "gunicorn --chdir src app:app --bind 0.0.0.0:$PORT"
