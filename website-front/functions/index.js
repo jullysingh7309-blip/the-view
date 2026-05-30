@@ -5,7 +5,7 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var app = express();
-const exphbs  = require('express-handlebars');
+const { engine: hbsEngine } = require('express-handlebars');
 
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admin');
@@ -16,7 +16,7 @@ app.set('trust proxy', 1);
 // View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-app.engine('hbs', exphbs({
+app.engine('hbs', hbsEngine({
   defaultLayout: 'main',
   extname: '.hbs',
   partialsDir: __dirname + '/views/partials/'
