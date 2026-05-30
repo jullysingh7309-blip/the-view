@@ -178,6 +178,10 @@ def addVideo():
     response = requests.request("GET", url, headers=headers, params=querystring)
     response = json.loads(response.text)
 
+    if 'value' not in response:
+        print(f"addVideo: Bing API returned no 'value' key: {list(response.keys())}")
+        return
+
     for i in range(0, len(response['value'])):
         li = {}
         val = response['value'][i]
@@ -567,6 +571,9 @@ def fetchBingNews(categoryType, categoryName):
     }
     response = requests.request("GET", url, headers=headers, params=querystring)
     content_list = json.loads(response.text)
+    if 'value' not in content_list:
+        print(f"fetchBingNews: Bing API returned no 'value' key: {list(content_list.keys())}")
+        return "Bing API unavailable"
     content_list = content_list['value']
     print(len(content_list))
     for i in range(0, len(content_list)):
