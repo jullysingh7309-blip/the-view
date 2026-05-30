@@ -20,11 +20,27 @@ from nltk.corpus import wordnet
 SUPABASE_URL = os.environ.get('SUPABASE_URL', '')
 SUPABASE_KEY = os.environ.get('SUPABASE_KEY', '')
 
+def get_db():
+    """Always return a fresh Supabase client to avoid connection drops."""
+    return create_client(SUPABASE_URL, SUPABASE_KEY)
+
+def db_execute(fn, retries=3):
+    """Execute a DB operation with retry on connection error."""
+    for attempt in range(retries):
+        try:
+            return fn(get_db())
+        except Exception as e:
+            print(f"DB error (attempt {attempt+1}/{retries}): {e}")
+            if attempt < retries - 1:
+                time.sleep(2)
+            else:
+                raise
+
 try:
-    db = create_client(SUPABASE_URL, SUPABASE_KEY)
+    db = get_db()
+    print("Supabase connected OK")
 except Exception as e:
     print(f"WARNING: Supabase initialization failed: {e}")
-    print("WARNING: Running in offline mode. Database operations will not work.")
     db = None
 
 from newspaper import Article
@@ -39,7 +55,7 @@ import json
 
 ########################  NOTIFICATION START  ######################################################
 def notificationPost():
-    response = db.table('video').select('*').order('createdAt', desc=True).limit(2).execute()
+    response = get_db().table('video').select('*').order('createdAt', desc=True).limit(2).execute()
 
     newli = {}
     for doc in response.data:
@@ -55,7 +71,7 @@ def notificationPost():
             'date': doc['publishedAt']
         }
 
-        deviceinfo_response = db.table('deviceinfo').select('*').execute()
+        deviceinfo_response = get_db().table('deviceinfo').select('*').execute()
         for dc in deviceinfo_response.data:
             newli = {
                 'to': dc['token'],
@@ -76,12 +92,12 @@ def notificationPost():
 
 
 def notificationNewPost():
-    deviceinfo_response = db.table('deviceinfo').select('*').execute()
+    deviceinfo_response = get_db().table('deviceinfo').select('*').execute()
 
     for dc in deviceinfo_response.data:
         category_li = dc['category_preference']
         for val in category_li:
-            response = db.table('published').select('*').eq('category', val).order('createdAt', desc=True).limit(1).execute()
+            response = get_db().table('published').select('*').eq('category', val).order('createdAt', desc=True).limit(1).execute()
             for doc in response.data:
                 notification = {'title': doc['title'], 'body': doc['description'],
                                 'image': doc['urlToImage'],
@@ -110,14 +126,14 @@ def notificationNewPost():
 
 
 def notificationKeyPlayer(content):
-    deviceinfo_response = db.table('deviceinfo').select('*').execute()
+    deviceinfo_response = get_db().table('deviceinfo').select('*').execute()
 
     for dc in deviceinfo_response.data:
         key_li = content['keyplayers']
         for player in key_li:
             print(player)
             if player in dc['key_preference']:
-                r = db.table('published').select('*').eq('id', content['id']).execute()
+                r = get_db().table('published').select('*').eq('id', content['id']).execute()
                 if r.data:
                     pending_News_dict = r.data[0]
 
@@ -200,12 +216,12 @@ def addVideo():
             li['publishedAt'] = m + " " + newUpdate[2] + ", " + newUpdate[0] + " " + str(hour) + ":" + time_parts[1] + " " + zone
 
             if li['contentUrl'].split('.')[1] == 'youtube':
-                r = db.table('published').select('*').eq('title', li['title']).execute()
+                r = get_db().table('published').select('*').eq('title', li['title']).execute()
                 if r.data:
                     print('Video Available')
                 else:
                     print('Adding Video')
-                    db.table('video').insert(li).execute()
+                    get_db().table('video').insert(li).execute()
 
 
 def get_human_names(text):
@@ -277,18 +293,18 @@ def addHashtags(newTag, story_id):
     story_id = [story_id]
     newCount = 1
     try:
-        response = db.table('hashtags').select('*').eq('tag_name', newTag).execute()
+        response = get_db().table('hashtags').select('*').eq('tag_name', newTag).execute()
         if response.data:
             hash_val = response.data[0]
             story_id.extend(hash_val['ids'])
             newCount = newCount + hash_val['count']
-            db.table('hashtags').update({'count': newCount, 'ids': story_id}).eq('tag_name', newTag).execute()
+            get_db().table('hashtags').update({'count': newCount, 'ids': story_id}).eq('tag_name', newTag).execute()
         else:
             try:
-                db.table('hashtags').insert({'tag_name': newTag, 'count': newCount, 'ids': story_id}).execute()
+                get_db().table('hashtags').insert({'tag_name': newTag, 'count': newCount, 'ids': story_id}).execute()
             except Exception:
                 # Race condition: already inserted, update instead
-                db.table('hashtags').update({'count': newCount, 'ids': story_id}).eq('tag_name', newTag).execute()
+                get_db().table('hashtags').update({'count': newCount, 'ids': story_id}).eq('tag_name', newTag).execute()
     except Exception as e:
         print(f"addHashtags error for {newTag}: {e}")
 
@@ -298,19 +314,19 @@ def addKeyPlayers(keyPlayer, story_id, photo):
     newCount = 1
     imageUrl = photo
     try:
-        response = db.table('keyplayer').select('*').eq('name', keyPlayer).execute()
+        response = get_db().table('keyplayer').select('*').eq('name', keyPlayer).execute()
         if response.data:
             hash_val = response.data[0]
             story_id.extend(hash_val['ids'])
             newCount = newCount + hash_val['count']
-            db.table('keyplayer').update({
+            get_db().table('keyplayer').update({
                 'count': newCount,
                 'ids': story_id,
                 'urlToImage': imageUrl
             }).eq('name', keyPlayer).execute()
         else:
             try:
-                db.table('keyplayer').insert({
+                get_db().table('keyplayer').insert({
                     'name': keyPlayer,
                     'count': newCount,
                     'ids': story_id,
@@ -318,7 +334,7 @@ def addKeyPlayers(keyPlayer, story_id, photo):
                 }).execute()
             except Exception:
                 # Race condition: already inserted, update instead
-                db.table('keyplayer').update({
+                get_db().table('keyplayer').update({
                     'count': newCount,
                     'ids': story_id,
                     'urlToImage': imageUrl
@@ -377,14 +393,18 @@ def makedict(source_url, category):
 def fetch_news(source_url, category):
     data = makedict(source_url, category)
     for i in range(0, len(data)):
-        if category == 'hindi':
-            print('Hindi')
-            article = Article(data[i]['url'], language='hi')
-        else:
-            article = Article(data[i]['url'])
-        article.download()
-        article.parse()
-        article.nlp()
+        try:
+            if category == 'hindi':
+                print('Hindi')
+                article = Article(data[i]['url'], language='hi')
+            else:
+                article = Article(data[i]['url'])
+            article.download()
+            article.parse()
+            article.nlp()
+        except Exception as e:
+            print(f"Article error skipping {data[i].get('url','')}: {e}")
+            continue
 
         summary = article.summary
         summary_len = len(summary.split(' '))
@@ -392,7 +412,7 @@ def fetch_news(source_url, category):
             data[i]['description'] = summary
             if data[i]['description']:
 
-                r = db.table('published').select('*').eq('title', data[i]['title']).execute()
+                r = get_db().table('published').select('*').eq('title', data[i]['title']).execute()
                 if r.data:
                     print('Available')
                 else:
@@ -434,7 +454,7 @@ def fetch_news(source_url, category):
 
                     data[i]['keyplayers'] = person_names
 
-                    insert_result = db.table('published').insert(data[i]).execute()
+                    insert_result = get_db().table('published').insert(data[i]).execute()
                     id_post = insert_result.data[0]['id'] if insert_result.data else ''
                     content = {}
                     if insert_result.data:
@@ -552,12 +572,12 @@ def fetchBingNews(categoryType, categoryName):
     for i in range(0, len(content_list)):
         data = makeBingdict(content_list[i], categoryName)
 
-        r = db.table('published').select('*').eq('title', data['title']).execute()
+        r = get_db().table('published').select('*').eq('title', data['title']).execute()
         if r.data:
             print('Available')
         else:
             print("Adding")
-            insert_result = db.table('published').insert(data).execute()
+            insert_result = get_db().table('published').insert(data).execute()
             id_post = insert_result.data[0]['id'] if insert_result.data else ''
             content = {}
             if insert_result.data:
